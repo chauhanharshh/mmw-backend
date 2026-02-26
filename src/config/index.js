@@ -12,10 +12,11 @@ const config = {
     dbName: env.MONGO_DB_NAME || 'mapsmyway'
   },
   cors: {
-    origins: (env.CORS_ORIGINS || 'https://mapsmyway.com, https://www.mapsmyway.com, http://localhost:5173, http://localhost:3000')
-      .split(',')
-      .map((o) => o.trim())
-      .filter(Boolean)
+    origins: [
+      'https://mapsmyway.com',
+      'https://www.mapsmyway.com',
+      ...(env.CORS_ORIGINS ? env.CORS_ORIGINS.split(',').map(o => o.trim()).filter(Boolean) : ['http://localhost:5173', 'http://localhost:3000'])
+    ]
   },
   firebase: {
     projectId: env.FIREBASE_PROJECT_ID,

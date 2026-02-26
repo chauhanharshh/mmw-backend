@@ -45,7 +45,7 @@ const corsOptions = {
     if (isWildcardAllowed || allowed.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error(`CORS: origin '${origin}' not allowed`));
+      callback(null, false); // Fail properly without throwing 500 internal server error
     }
   },
   credentials: true,
