@@ -38,7 +38,11 @@ const corsOptions = {
     // Allow requests with no origin (curl, Postman, server-to-server)
     if (!origin) return callback(null, true);
     const allowed = config.cors.origins;
-    if (allowed.includes('*') || allowed.includes(origin)) {
+
+    // Explicitly disallow wildcard in production
+    const isWildcardAllowed = allowed.includes('*') && config.env !== 'production';
+
+    if (isWildcardAllowed || allowed.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error(`CORS: origin '${origin}' not allowed`));

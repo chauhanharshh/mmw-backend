@@ -12,7 +12,7 @@ const config = {
     dbName: env.MONGO_DB_NAME || 'mapsmyway'
   },
   cors: {
-    origins: (env.CORS_ORIGINS || '*')
+    origins: (env.CORS_ORIGINS || 'https://mapsmyway.com, https://www.mapsmyway.com, http://localhost:5173, http://localhost:3000')
       .split(',')
       .map((o) => o.trim())
       .filter(Boolean)
